@@ -5,24 +5,33 @@ package medium.m229
 class Solution {
 
     fun majorityElement(nums: IntArray): List<Int> {
-        // Sorting array in place to have O(1) space. In production code this method would have been kept pure
-        nums.sort()
-        val majorityMinCount = nums.size / 3.0
-        val result = mutableListOf<Int>()
+        var candidate1 = 0
+        var candidate2 = 1
+        var counter1 = 0
+        var counter2 = 0
+        for (number in nums) {
+            when {
+                number == candidate1 -> counter1++
+                number == candidate2 -> counter2++
 
-        var currentNumber = nums[0]
-        var currentNumberCounter = 1
-        for (index in 1..nums.lastIndex) {
-            if (nums[index] == currentNumber) {
-                currentNumberCounter++
-            } else {
-                if (currentNumberCounter > majorityMinCount) result.add(currentNumber)
-                currentNumber = nums[index]
-                currentNumberCounter = 1
+                counter1 == 0 -> {
+                    candidate1 = number
+                    counter1 = 1
+                }
+
+                counter2 == 0 -> {
+                    candidate2 = number
+                    counter2 = 1
+                }
+
+                else -> {
+                    counter1--
+                    counter2--
+                }
             }
         }
-        if (currentNumberCounter > majorityMinCount) result.add(currentNumber)
-        return result
+        return listOf(candidate1, candidate2)
+            .filter { candidate -> nums.count { candidate == it } > nums.size / 3.0 }
     }
 
 }

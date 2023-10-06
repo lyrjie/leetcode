@@ -14,7 +14,7 @@ class SolutionTest {
 
         val result = solver.majorityElement(input)
 
-        assertEquals(listOf(3), result)
+        assertEquals(setOf(3), result.toSet())
     }
 
     @Test
@@ -23,7 +23,7 @@ class SolutionTest {
 
         val result = solver.majorityElement(input)
 
-        assertEquals(listOf(1), result)
+        assertEquals(setOf(1), result.toSet())
     }
 
     @Test
@@ -32,7 +32,7 @@ class SolutionTest {
 
         val result = solver.majorityElement(input)
 
-        assertEquals(listOf(1, 2), result)
+        assertEquals(setOf(1, 2), result.toSet())
     }
 
 }
